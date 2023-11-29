@@ -40,6 +40,11 @@ def load(ui):
     ui.textEdit_IOText.setPlainText("Hello World!")
     ui.textEdit_IOPath.setPlainText("boards")
 
+    # Set IOText Texsize
+    font = QtGui.QFont()
+    font.setPointSize(14)
+    ui.textEdit_IOText.setFont(font)
+
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
@@ -166,8 +171,8 @@ if __name__ == "__main__":
 
     def pushButton_Extract_clicked():
         print("Button extract clicked")
-        ui.statusLabel.setText("Status: Idle")
-        ui.labelGenerated.setText("Generated Chessboard (0):")
+        # ui.statusLabel.setText("Status: Idle")
+        # ui.labelGenerated.setText("Generated Chessboard (0):")
 
         # clear scroll area
         scroll_area = ui.scrollArea

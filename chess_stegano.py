@@ -179,7 +179,7 @@ def readMessage(FEN, key, block_size, pawn_mapping=None):
                     pawnPos = row+1
         
         if haveOriginalG and pawnPos == key:
-            block = '111'
+            block = POS_MAPPING[8]
         else:
             block = POS_MAPPING[pawnPos]
 
@@ -225,7 +225,7 @@ def embedMsg(msg, key):
 
         P_pos = 1
         OGState = "dontcare"
-        if block == '111': P_pos = key ; OGState = "yes"
+        if block == POS_MAPPING[8]: P_pos = key ; OGState = "yes"
         else:
             for pos, value in POS_MAPPING.items():
                 if value == block:
