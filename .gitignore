@@ -1,6 +1,6 @@
 __pycache__
 boards/*
 experiments/*
-*.png
+# *.png
 *.pkl
 *.bin
