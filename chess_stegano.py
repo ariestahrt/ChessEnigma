@@ -25,6 +25,49 @@ def validate(FEN):
     if king[0] == False or king[1] == False:
         return False
     
+    # only 2 king available
+    king_count = 0
+    for square in chess.SQUARES:
+        piece = board.piece_at(square)
+        if piece is not None and piece.symbol() == 'k':
+            king_count+=1
+        if piece is not None and piece.symbol() == 'K':
+            king_count+=1
+
+    # king not placed adjacently
+    for square in chess.SQUARES:
+        piece = board.piece_at(square)
+        if piece is not None and piece.symbol() == 'k':
+            for i in range(-1, 2):
+                for j in range(-1, 2):
+                    if i == 0 and j == 0: continue
+                    if chess.square_rank(square)+i < 0 or chess.square_rank(square)+i > 7: continue
+                    if chess.square_file(square)+j < 0 or chess.square_file(square)+j > 7: continue
+
+                    adj_square = chess.square(chess.square_file(square)+j, chess.square_rank(square)+i)
+                    adj_piece = board.piece_at(adj_square)
+                    if adj_piece is not None and adj_piece.symbol() == 'K':
+                        return False
+
+        if piece is not None and piece.symbol() == 'K':
+            for i in range(-1, 2):
+                for j in range(-1, 2):
+                    if i == 0 and j == 0: continue
+                    if chess.square_rank(square)+i < 0 or chess.square_rank(square)+i > 7: continue
+                    if chess.square_file(square)+j < 0 or chess.square_file(square)+j > 7: continue
+
+                    adj_square = chess.square(chess.square_file(square)+j, chess.square_rank(square)+i)
+                    adj_piece = board.piece_at(adj_square)
+                    if adj_piece is not None and adj_piece.symbol() == 'k':
+                        return False
+
+    # both king not in check
+    if board.is_check():
+        return False
+
+    if king_count != 2:
+        return False
+
     return True
 
 POS_MAPPING = {
